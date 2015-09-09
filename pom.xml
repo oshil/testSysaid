@@ -66,12 +66,6 @@
     </dependency>
   </dependencies>
   <build>
-    <resources>
-      <resource>
-        <directory>src/main/resources</directory>
-        <filtering>true</filtering>
-      </resource>
-    </resources>
     <testResources>
       <testResource>
         <directory>src/test/resources</directory>
@@ -91,9 +85,6 @@
         <artifactId>maven-surefire-plugin</artifactId>
         <version>2.18.1</version>
         <configuration>
-          <suiteXmlFiles>
-            <suiteXmlFile>src/test/resources/testngSmokeReady.xml</suiteXmlFile>
-          </suiteXmlFiles>
           <systemPropertyVariables>
             <application.properties>/application.properties</application.properties>
           </systemPropertyVariables>
@@ -117,38 +108,14 @@
       <properties>
         <capabilities>/firefox.capabilities</capabilities>
       </properties>
-    </profile>
-    <profile>
-      <id>chrome</id>
-      <properties>
-        <capabilities>/chrome.capabilities</capabilities>
-      </properties>
-    </profile>
-    <profile>
-      <id>ie</id>
-      <properties>
-        <capabilities>/ie.capabilities</capabilities>
-      </properties>
-    </profile>
-    <profile>
-      <id>safari</id>
-      <properties>
-        <capabilities>/safari.capabilities</capabilities>
-      </properties>
-    </profile>
-    <profile>
-      <id>phantomjs</id>
-      <properties>
-        <capabilities>/phantomjs.capabilities</capabilities>
-      </properties>
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
     </profile>
     <profile>
-      <id>opera</id>
+      <id>phantomjs</id>
       <properties>
-        <capabilities>/opera.capabilities</capabilities>
+        <capabilities>/phantomjs.capabilities</capabilities>
       </properties>
     </profile>
     <profile>
@@ -167,7 +134,7 @@
     <profile>
       <id>stage</id>
       <properties>
-        <site.url>http://52.10.6.51:8080</site.url>
+        <site.url>https://automationtest1.qa.sysaidit.com</site.url>
       </properties>
       <activation>
         <activeByDefault>true</activeByDefault>
@@ -188,38 +155,9 @@
     <!-- TestNg config files -->
     <profile>
       <id>debug</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <configuration>
-              <suiteXmlFiles>
-                <suiteXmlFile>src/test/resources/testngSmokeReady.xml</suiteXmlFile>
-              </suiteXmlFiles>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
       <activation>
         <activeByDefault>true</activeByDefault>
       </activation>
-    </profile>
-    <profile>
-      <id>all</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <configuration>
-              <suiteXmlFiles>
-                <suiteXmlFile>src/test/resources/testngAll.xml</suiteXmlFile>
-              </suiteXmlFiles>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
     </profile>
     <profile>
       <id>smoke</id>
@@ -230,7 +168,7 @@
             <artifactId>maven-surefire-plugin</artifactId>
             <configuration>
               <suiteXmlFiles>
-                <suiteXmlFile>src/test/resources/testngSmoke.xml</suiteXmlFile>
+                <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
               </suiteXmlFiles>
             </configuration>
           </plugin>

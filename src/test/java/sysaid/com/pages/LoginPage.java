@@ -8,9 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.io.IOException;
 
-/**
- * Created by Л,Oleg on 5/19/2015.
- */
+
 public class LoginPage extends Page {
 
     private static Logger Log = Logger.getLogger(LogLog4j.class.getName());
@@ -19,7 +17,7 @@ public class LoginPage extends Page {
     WebElement loginBlock;
 
     @FindBy(name = "userName")
-    WebElement emailField;
+    WebElement userName;
 
     @FindBy(name = "password")
     WebElement passwordField;
@@ -30,11 +28,8 @@ public class LoginPage extends Page {
     @FindBy(name = "rememberMeForDisplay")
     WebElement rememberMeCheckbox;
 
-    @FindBy(xpath = "//*[contains(text(),'Invalid Password')]")
-    WebElement invalidPasswordAlert;
-
-    @FindBy(xpath = "//*[contains(text(),'Invalid Email')]")
-    WebElement invalidEmailAlert;
+    @FindBy(xpath ="//*[@id='waiting_message'][contains (text(),'Failed')]")
+    WebElement messageError;
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -42,11 +37,11 @@ public class LoginPage extends Page {
         PageFactory.initElements(driver, this);
     }
 
-    public LoginPage opennLoginPage(WebDriver driver) {
+    public LoginPage openLoginPage(WebDriver driver) {
         driver.get(PAGE_URL);
         return this;
     }
-    public LoginPage openLoginPage(WebDriver driver, String baseUrl) {
+    public LoginPage openLoginPage() {
         Log.info("Opening login page");
         driver.get(PAGE_URL);
         return this;
@@ -62,19 +57,9 @@ public class LoginPage extends Page {
         }return this;
     }
 
-    public LoginPage waitUntilAllertEmailIsLogIsLoaded() {
+    public LoginPage waitUntilErrorMessageIsLogIsLoaded() {
         try {
-            waitUntilElementIsLoaded(invalidEmailAlert);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }return this;
-    }
-
-    public LoginPage waitUntilAllertPasswordIsLogIsLoaded() {
-        try {
-            waitUntilElementIsLoaded(invalidPasswordAlert);
+            waitUntilElementIsLoaded(messageError);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -87,9 +72,9 @@ public class LoginPage extends Page {
         return exists(loginBlock);
     }
 
-    public LoginPage fillEmailField(String email) {
-        setElementText(emailField, email);
-        Log.info("entering email: " + email + " ");
+    public LoginPage fillEmailField(String user) {
+        setElementText(userName, user);
+        Log.info("entering userName: " + user + " ");
         return this;
     }
 
@@ -104,25 +89,21 @@ public class LoginPage extends Page {
         return this;
     }
 
+    public LoginPage clickOnCheckBox() {
+        clickElement(rememberMeCheckbox);
+        return this;
+    }
 
-
-    public LoginPage login(String email, String password) {
-        //openLoginPage();
+    public LoginPage login(String user, String password) {
+        openLoginPage();
         waitUntilLoginPageIsLoaded();
-        fillEmailField(email);
+        fillEmailField(user);
         fillPasswordField(password);
         clickOnLogin();
         return this;
     }
 
-
-    public boolean alertMessageInvalidEmail() {
-        return exists(invalidEmailAlert);
+    public boolean alertMessageWrongCredentials() {
+        return exists(messageError);
     }
-
-    public boolean alertMessageInvalidPassword() {
-        return exists(invalidPasswordAlert);
-    }
-
-
 }

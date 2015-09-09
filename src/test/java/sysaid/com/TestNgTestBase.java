@@ -1,13 +1,13 @@
 package sysaid.com;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
+import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.Capabilities;
 
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.*;
 
 import ru.stqa.selenium.factory.WebDriverFactory;
 import ru.stqa.selenium.factory.WebDriverFactoryMode;
@@ -19,30 +19,27 @@ import sysaid.com.util.PropertyLoader;
  */
 public class TestNgTestBase {
 
-  protected static String gridHubUrl;
-  protected static String baseUrl;
   protected static Capabilities capabilities;
 
-  protected WebDriver driver;
+  public WebDriver driver;
+  protected String gridHubUrl;
+  protected String baseUrl;
 
-  @BeforeSuite
-  public void initTestSuite() throws IOException {
+
+  @BeforeClass(alwaysRun = true)
+  public void init() throws IOException {
     baseUrl = PropertyLoader.loadProperty("site.url");
-    gridHubUrl = PropertyLoader.loadProperty("grid.url");
-    if ("".equals(gridHubUrl)) {
-      gridHubUrl = null;
-    }
-    capabilities = PropertyLoader.loadCapabilities();
-    WebDriverFactory.setMode(WebDriverFactoryMode.THREADLOCAL_SINGLETON);
+    Capabilities capabilities = PropertyLoader.loadCapabilities();
+    PropertyConfigurator.configure("log4j.properties");
+    driver = WebDriverFactory.getDriver(capabilities);
+
+    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
   }
 
-  @BeforeMethod
-  public void initWebDriver() {
-    driver = WebDriverFactory.getDriver(gridHubUrl, capabilities);
-  }
-
-  @AfterSuite(alwaysRun = true)
+  @AfterClass(alwaysRun = true)
   public void tearDown() {
-    WebDriverFactory.dismissAll();
+    if (driver != null) {
+      WebDriverFactory.dismissDriver(driver);
+    }
   }
 }
