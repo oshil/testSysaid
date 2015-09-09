@@ -28,7 +28,7 @@ public class MainPage extends Page {
     WebElement addNewIncident;
 
     //Mandatory Fields
-    @FindBy(xpath = "//*[@class='newListSelected problem_type_CustomSelect']//span")
+    @FindBy(xpath = "//*[@class='newListSelected problem_type_CustomSelect']")
     WebElement category1;
     @FindBy(xpath = "//*[@class='newListSelected subcategory_CustomSelect']//span")
     WebElement category2;
@@ -176,6 +176,10 @@ public class MainPage extends Page {
         return this;
     }
 
+    public MainPage clickOnCat1() {
+        clickElement(category1);
+        return this;
+    }
 
 //fill
     public MainPage fillCategory1Field(String c1) {
