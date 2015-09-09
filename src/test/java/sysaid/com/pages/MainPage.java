@@ -2,18 +2,12 @@ package sysaid.com.pages;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.List;
 
 public class MainPage extends Page {
     private static Logger Log = Logger.getLogger(LogLog4j.class.getName());
@@ -138,7 +132,8 @@ public class MainPage extends Page {
     }
 
     public MainPage clickOnAddNewIncidenstButton() {
-        clickElement(addNewIncident);
+        // clickElement(addNewIncident);
+        driver.get("https://automationtest1.qa.sysaidit.com/SREdit.jsp?id=0&fromId=IncidentsList&SR_Type=1&templateID=20");
         return this;
     }
 
