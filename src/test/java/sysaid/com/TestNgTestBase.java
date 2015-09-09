@@ -1,18 +1,15 @@
 package sysaid.com;
 
+import org.apache.log4j.PropertyConfigurator;
+import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import ru.stqa.selenium.factory.WebDriverFactory;
+import sysaid.com.util.PropertyLoader;
+
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
-
-import org.apache.log4j.PropertyConfigurator;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.Capabilities;
-
-import org.testng.annotations.*;
-
-import ru.stqa.selenium.factory.WebDriverFactory;
-import ru.stqa.selenium.factory.WebDriverFactoryMode;
-
-import sysaid.com.util.PropertyLoader;
 
 /**
  * Base class for TestNG-based test classes
@@ -33,7 +30,7 @@ public class TestNgTestBase {
     PropertyConfigurator.configure("log4j.properties");
     driver = WebDriverFactory.getDriver(capabilities);
 
-    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    driver.manage().timeouts().implicitlyWait(50, TimeUnit.SECONDS);
   }
 
   @AfterClass(alwaysRun = true)
