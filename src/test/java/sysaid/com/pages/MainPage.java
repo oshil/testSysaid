@@ -18,6 +18,9 @@ import java.util.List;
 public class MainPage extends Page {
     private static Logger Log = Logger.getLogger(LogLog4j.class.getName());
 
+    @FindBy(xpath = "//span[contains(text(),'Incident')]")
+    WebElement incident;
+
     //1
     @FindBy(xpath = "//*[@id='user-links']/li[2]/span[contains( text(),'qatest')]")
     WebElement userName;
@@ -115,10 +118,14 @@ public class MainPage extends Page {
     }
 
     public boolean isLoggedIn() {
-
         return exists(userName);
     }
 
+    public boolean isIncidentCreated() {
+        return exists(incident);
+    }
+
+//click
     public MainPage clickOnServiceDesk() {
         Log.info("Click on Service Desk button");
         clickElement(serviceDesk);
@@ -144,5 +151,104 @@ public class MainPage extends Page {
         clickElement(logout);
         return this;
     }
+
+    public MainPage clickOnAddANoteButton() {
+        clickElement(addANoteButton);
+        return this;
+    }
+
+    public MainPage clickOnAddAttachButton() {
+        clickElement(attachmentsButton);
+        return this;
+    }
+
+    public MainPage clickOnActivitiesTab() {
+        clickElement(activitiesTab);
+        return this;
+    }
+
+    public MainPage clickOnGeneralTab() {
+        clickElement(generalTab);
+        return this;
+    }
+    public MainPage clickOnAddActButton() {
+        clickElement(addActButton);
+        return this;
+    }
+
+    public MainPage clickOnApplyButton() {
+        clickElement(applyButton);
+        return this;
+    }
+
+
+//fill
+    public MainPage fillCategory1Field(String c1) {
+        setElementText(category1, c1);
+        Log.info("entering Category1: " + c1 + " ");
+        return this;
+    }
+
+    public MainPage fillCategory2Field(String c2) {
+        setElementText(category2, c2);
+        Log.info("entering Category2: " + c2 + " ");
+        return this;
+    }
+
+    public MainPage fillCategory3Field(String c3) {
+        setElementText(category1, c3);
+        Log.info("entering Category1: " + c3 + " ");
+        return this;
+    }
+
+    public MainPage fillTitleField(String t) {
+        setElementText(title, t);
+        Log.info("entering title: " + t + " ");
+        return this;
+    }
+
+    public MainPage fillDescriptionField(String d) {
+        setElementText(desc, d);
+        Log.info("entering Description: " + d + " ");
+        return this;
+    }
+
+    public MainPage fillRequestUserField(String u) {
+        setElementText(requestUser, u);
+        Log.info("entering Request user: " + u + " ");
+        return this;
+    }
+
+    public MainPage fillNotesField(String n) {
+        setElementText(notes, n);
+        Log.info("entering notes: " + n + " ");
+        return this;
+    }
+
+    public MainPage fillStartDayField(String StartDay) {
+        setElementText(startDay, StartDay);
+        Log.info("entering Start Day: " + StartDay + " ");
+        return this;
+    }
+
+    public MainPage fillStartTimeField(String StartTime) {
+        setElementText(startTime, StartTime);
+        Log.info("entering Start Time: " + StartTime + " ");
+        return this;
+    }
+
+    public MainPage fillEndDayField(String EndDay) {
+        setElementText(startDay, EndDay);
+        Log.info("entering End Day: " + EndDay + " ");
+        return this;
+    }
+
+    public MainPage fillEndTimeField(String EndTime) {
+        setElementText(endTime, EndTime);
+        Log.info("entering Start Time: " + EndTime + " ");
+        return this;
+    }
+
+
 
 }

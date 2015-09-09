@@ -72,7 +72,7 @@ public class LoginPage extends Page {
         return exists(loginBlock);
     }
 
-    public LoginPage fillEmailField(String user) {
+    public LoginPage fillUserField(String user) {
         setElementText(userName, user);
         Log.info("entering userName: " + user + " ");
         return this;
@@ -97,7 +97,7 @@ public class LoginPage extends Page {
     public LoginPage login(String user, String password) {
         openLoginPage();
         waitUntilLoginPageIsLoaded();
-        fillEmailField(user);
+        fillUserField(user);
         fillPasswordField(password);
         clickOnLogin();
         return this;

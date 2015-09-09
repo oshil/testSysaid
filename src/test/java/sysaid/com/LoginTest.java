@@ -3,8 +3,6 @@ package sysaid.com;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -44,7 +42,7 @@ public class LoginTest extends TestNgTestBase{
         Log.info("Checking that all correct data added successfully");
         try {
             loginPage
-                    .fillEmailField(USER)
+                    .fillUserField(USER)
                     .fillPasswordField(PASSWORD)
                     .clickOnLogin();
             mainPage.waitUntilMainPageIsLoaded();
@@ -63,7 +61,7 @@ mainPage
         Log.info("Checking inability lodin with wrong credentials");
         try {
             loginPage
-                    .fillEmailField("aaaa")
+                    .fillUserField("aaaa")
                     .fillPasswordField("11111")
                     .clickOnCheckBox()
                     .clickOnLogin();
