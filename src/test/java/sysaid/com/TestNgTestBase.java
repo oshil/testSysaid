@@ -17,11 +17,9 @@ import java.util.concurrent.TimeUnit;
 public class TestNgTestBase {
 
   protected static Capabilities capabilities;
-
   public WebDriver driver;
   protected String gridHubUrl;
   protected String baseUrl;
-
 
   @BeforeClass(alwaysRun = true)
   public void init() throws IOException {

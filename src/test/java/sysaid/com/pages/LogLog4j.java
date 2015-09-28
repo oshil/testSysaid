@@ -1,9 +1,5 @@
 package sysaid.com.pages;
 
-/**
- * Created by Iakov Volf on 7/8/2015.
- */
-
 
 import org.apache.log4j.Logger;
 
